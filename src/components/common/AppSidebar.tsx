@@ -38,12 +38,7 @@ function AppSidebar() {
               <SidebarMenuSub>
                 <SidebarMenuSubItem>
                   <SidebarMenuSubButton asChild>
-                    <a href="/">Bluetooth (BLE-Server)</a>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <a href="/">Cable (Soon)</a>
+                    <a href="/connection">Bluetooth (BLE-Server)</a>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               </SidebarMenuSub>
