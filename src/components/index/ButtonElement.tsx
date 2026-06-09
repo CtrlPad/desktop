@@ -20,28 +20,32 @@ const media: string[] = [
   "Mute Microphone"
 ]
 
-interface Props {
+interface Button {
   id: number;
   label: string;
+}
+
+interface Props {
+  button: Button;
   currentAction: string;
   onSelectAction: (buttonId: number, actionName: string) => void;
 }
 
-const ButtonElement = ({ label, id, currentAction, onSelectAction }: Props) => {
+const ButtonElement = ({ button, currentAction, onSelectAction }: Props) => {
   const handleItemClick = (item: string) => {
-    onSelectAction(id, item);
+    onSelectAction(button.id, item);
   }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="flex items-center justify-center border-3 border-primary size-24 rounded-md text-primary">
-          <p>{label}</p>
+          <p>{button.label}</p>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64">
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-sm text-primary">Edit Button {id + 1}</DropdownMenuLabel>
+          <DropdownMenuLabel className="text-sm text-primary">Edit Button {button.id + 1}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel>Open Application</DropdownMenuLabel>
           {applications.map((item) => (

@@ -10,25 +10,20 @@ const buttons = [
   { id: 5, label: "5" },
 ]
 
-export const ButtonGrid = () => {
-  const [selectedActions, setSelectedActions] = useState<Record<number, string>>({})
+interface Props {
+  selectedActions: Record<number, string>;
+  onSelectAction: (buttonId: number, actionName: string) => void;
+}
 
-  const handleSelectAction = (buttonId: number, actionName: string) => {
-    setSelectedActions((prev) => ({
-      ...prev,
-      [buttonId]: prev[buttonId] === actionName ? "" : actionName,
-    }))
-  }
-
+export const ButtonGrid = ({ selectedActions, onSelectAction }: Props) => {
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
       {buttons.map((button) => (
         <ButtonElement
           key={button.id}
-          id={button.id}
-          label={button.label}
+          button={button}
           currentAction={selectedActions[button.id] || ""}
-          onSelectAction={handleSelectAction}
+          onSelectAction={onSelectAction}
         />
       ))}
     </div>
