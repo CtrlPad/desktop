@@ -1,19 +1,7 @@
-import {
-  DropdownMenu,
-  DropdownMenuGroup,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuCheckboxItem
-} from "@/components/ui/dropdown-menu"
+import { ButtonElement } from "./ButtonElement"
+import { useState } from "react"
 
-interface Props {
-  id: number;
-  label: string;
-}
-
-const buttons: Props[] = [
+const buttons = [
   { id: 0, label: "0" },
   { id: 1, label: "1" },
   { id: 2, label: "2" },
@@ -22,51 +10,27 @@ const buttons: Props[] = [
   { id: 5, label: "5" },
 ]
 
-const applications = [
-  "Discord",
-  "Spotify",
-  "Bitwarden"
-]
-
-const media = [
-  "Volume Up",
-  "Volume Down",
-  "Mute Microphone"
-]
-
 export const ButtonGrid = () => {
+  const [selectedActions, setSelectedActions] = useState<Record<number, string>>({})
+
+  const handleSelectAction = (buttonId: number, actionName: string) => {
+    setSelectedActions((prev) => ({
+      ...prev,
+      [buttonId]: prev[buttonId] === actionName ? "" : actionName,
+    }))
+  }
+
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
       {buttons.map((button) => (
-        <ButtonElement key={button.id} {...button} />
+        <ButtonElement
+          key={button.id}
+          id={button.id}
+          label={button.label}
+          currentAction={selectedActions[button.id] || ""}
+          onSelectAction={handleSelectAction}
+        />
       ))}
     </div>
-  )
-}
-
-const ButtonElement = ({ label, id }: Props) => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <div className="flex items-center justify-center border-3 border-primary size-24 rounded-md text-primary">
-          <p>{label}</p>
-        </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64">
-        <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-sm text-primary">Edit Button {id + 1}</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuLabel>Open Application</DropdownMenuLabel>
-          {applications.map((application) => (
-            <DropdownMenuCheckboxItem>{application}</DropdownMenuCheckboxItem>
-          ))}
-          <DropdownMenuSeparator />
-          <DropdownMenuLabel>Media</DropdownMenuLabel>
-          {media.map((media) => (
-            <DropdownMenuCheckboxItem>{media}</DropdownMenuCheckboxItem>
-          ))}
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
   )
 }
