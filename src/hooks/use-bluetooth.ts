@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { connect, startScan, type BleDevice } from "@mnlphlp/plugin-blec"
+import { connect, sendString, startScan, type BleDevice } from "@mnlphlp/plugin-blec"
 
 const useScanDevices = () => {
   const [bleDevices, setBleDevices] = useState<BleDevice[]>([])
@@ -33,4 +33,16 @@ const useConnectDevice = () => {
   return { connectDevice }
 }
 
-export { useScanDevices, useConnectDevice }
+const useSendLayout = () => {
+  const sendLayout = async (layoutConfig: string) => {
+    try {
+      console.log("Config:", layoutConfig)
+      await sendString("62148466-62a9-4f65-bc29-2c2e408b8684", layoutConfig)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  return { sendLayout }
+}
+
+export { useScanDevices, useConnectDevice, useSendLayout }
