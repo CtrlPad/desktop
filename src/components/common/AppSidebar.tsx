@@ -9,44 +9,105 @@ import {
   SidebarMenuAction,
   SidebarMenuSubItem,
   SidebarMenuSub,
-  SidebarMenuSubButton
+  SidebarMenuSubButton,
+  SidebarHeader,
+  SidebarGroupLabel
 } from "@/components/ui/sidebar"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
+import { AppWindowMac, Bluetooth, Pencil, Disc3 } from "lucide-react"
+import packageJson from "../../../package.json"
 
-import { SquarePen, Cable } from "lucide-react"
+const applications = [
+  "Discord",
+  "Spotify",
+  "Bitwarden",
+  "Zen Browser",
+  "Ghostty",
+]
+
+const media = [
+  "Volume Up",
+  "Volume Down",
+  "Volume Mute",
+  "Microphone Toggle"
+]
 
 function AppSidebar() {
   return (
     <Sidebar>
+      <SidebarHeader>
+        <NavigationMenu>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="text-lg [&_svg]:h-5 [&_svg]:w-5">ctrlPad</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <NavigationMenuLink className="w-48">
+                <Pencil />
+                <span>Edit Button Layout</span>
+              </NavigationMenuLink>
+              <NavigationMenuLink className="w-48">
+                <Bluetooth />
+                <span>Bluetooth connection</span>
+              </NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel>Available Button Actions</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <a href="/">Edit Button Layout</a>
+              <SidebarMenuButton>
+                Applications
               </SidebarMenuButton>
               <SidebarMenuAction>
-                <SquarePen />
+                <AppWindowMac />
               </SidebarMenuAction>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <p>Connection</p>
-              </SidebarMenuButton>
-              <SidebarMenuAction>
-                <Cable />
-              </SidebarMenuAction>
               <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <a href="/connection">Bluetooth (BLE-Server)</a>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
+                {applications.map((item) => (
+                  <SidebarMenuSubItem>
+                    <SidebarMenuSubButton>
+                      {item}
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                ))}
               </SidebarMenuSub>
             </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                Media
+              </SidebarMenuButton>
+              <SidebarMenuAction>
+                <Disc3 />
+              </SidebarMenuAction>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuSub>
+                {media.map((item) => (
+                  <SidebarMenuSubItem>
+                    <SidebarMenuSubButton>
+                      {item}
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                ))}
+              </SidebarMenuSub>
+            </SidebarMenuItem>
+
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className="flex justify-between flex-row text-xs">
+        <p>v{packageJson.version}</p>
+        <p>by brainlesslukas</p>
+      </SidebarFooter>
     </Sidebar >
   )
 }
