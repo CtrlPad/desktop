@@ -4,22 +4,23 @@ import { startScan, type BleDevice } from "@mnlphlp/plugin-blec"
 const useScanDevices = () => {
   const [bleDevices, setBleDevices] = useState<BleDevice[]>([])
 
-  useEffect(() => {
-    const fetchDevices = async () => {
-      try {
-        const scanHandler = (devices: BleDevice[]) => {
-          console.log(devices)
-          setBleDevices(devices)
-        }
-        await startScan(scanHandler, 10000, true)
-      } catch (error) {
-        console.log(error)
+  const scanDevices = async () => {
+    try {
+      const scanHandler = (devices: BleDevice[]) => {
+        console.log(devices)
+        setBleDevices(devices)
       }
+      await startScan(scanHandler, 10000, true)
+    } catch (error) {
+      console.log(error)
     }
-    fetchDevices();
+  }
+
+  useEffect(() => {
+    scanDevices();
   }, [])
 
-  return { bleDevices }
+  return { bleDevices, scanDevices }
 }
 
 export { useScanDevices }
