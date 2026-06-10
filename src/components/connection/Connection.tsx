@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { BluetoothConnected, Bluetooth, SignalHigh, SignalMedium, SignalLow, RefreshCcw } from "lucide-react"
-import { useScanDevices } from "@/hooks/use-bluetooth"
+import { useConnectDevice, useScanDevices } from "@/hooks/use-bluetooth"
 
 function Connection() {
   const { bleDevices, scanDevices } = useScanDevices()
+  const { connectDevice } = useConnectDevice()
 
   const formatRssi = (rssi: number) => {
     if (rssi >= -30) return <SignalHigh className="text-green-500" />
@@ -39,7 +40,11 @@ function Connection() {
                     <TableCell className="w-[10px]"><Bluetooth size={18} /></TableCell>
                     <TableCell>{device.name}</TableCell>
                     <TableCell className="w-[10px]">{formatRssi(device.rssi) || ""}</TableCell>
-                    <TableCell className="w-[10px]"><Button><BluetoothConnected /></Button></TableCell>
+                    <TableCell className="w-[10px]">
+                      <Button onClick={() => connectDevice(device.address)}>
+                        <BluetoothConnected />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
