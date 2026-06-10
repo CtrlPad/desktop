@@ -18,7 +18,7 @@ export const ButtonEditor = () => {
   }
 
   return (
-    <div className="relative flex bg-background w-full h-screen text-white items-center justify-center">
+    <div className="relative flex w-full h-screen items-center justify-center">
       <ButtonGrid selectedActions={selectedActions} onSelectAction={handleSelectAction} />
       <Button className="absolute bottom-6 right-6" size="lg" onClick={handleUpload}>
         <span>Upload to ctrlPad</span><ArrowUpIcon />
