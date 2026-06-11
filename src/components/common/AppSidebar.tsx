@@ -13,14 +13,7 @@ import {
   SidebarHeader,
   SidebarGroupLabel
 } from "@/components/ui/sidebar"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { AppWindowMac, Bluetooth, Pencil, Disc3 } from "lucide-react"
+import { AppWindowMac, Disc3 } from "lucide-react"
 import packageJson from "../../../package.json"
 import Menu from "@/components/common/Menu"
 
