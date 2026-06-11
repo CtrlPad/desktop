@@ -13,9 +13,10 @@ import {
   SidebarHeader,
   SidebarGroupLabel
 } from "@/components/ui/sidebar"
-import { AppWindowMac, Disc3 } from "lucide-react"
+import { AppWindowMac, Disc3, GripVertical } from "lucide-react"
 import packageJson from "../../../package.json"
 import Menu from "@/components/common/Menu"
+import { useDraggable } from '@dnd-kit/react';
 
 const applications = [
   "Discord",
@@ -31,6 +32,23 @@ const media = [
   "Volume Mute",
   "Microphone Toggle"
 ]
+
+function DraggableSidebarItem({ id, children }: { id: string; children: React.ReactNode }) {
+  const { ref } = useDraggable({
+    id: id
+  });
+
+  return (
+    <div ref={ref}>
+      <SidebarMenuSubItem>
+        <SidebarMenuSubButton className="flex justify-between">
+          {children}
+          <GripVertical />
+        </SidebarMenuSubButton>
+      </SidebarMenuSubItem>
+    </div>
+  )
+}
 
 function AppSidebar() {
   return (
@@ -53,11 +71,7 @@ function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuSub>
                 {applications.map((item) => (
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
-                      {item}
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
+                  <DraggableSidebarItem id={"app-" + item} key={"app-" + item}>{item}</DraggableSidebarItem>
                 ))}
               </SidebarMenuSub>
             </SidebarMenuItem>
@@ -72,11 +86,7 @@ function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuSub>
                 {media.map((item) => (
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
-                      {item}
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
+                  <DraggableSidebarItem id={"media-" + item} key={"media-" + item}>{item}</DraggableSidebarItem>
                 ))}
               </SidebarMenuSub>
             </SidebarMenuItem>
