@@ -10,7 +10,7 @@ import { BluetoothSearching, Pencil } from "lucide-react"
 
 function Menu() {
   return (
-    <NavigationMenu className="z-50 absolute top-6 left-6">
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-lg [&>svg]:h-5 [&>svg]:w-5">

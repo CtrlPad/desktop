@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { AppWindowMac, Bluetooth, Pencil, Disc3 } from "lucide-react"
 import packageJson from "../../../package.json"
+import Menu from "@/components/common/Menu"
 
 const applications = [
   "Discord",
@@ -42,21 +43,7 @@ function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <NavigationMenu>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-lg [&_svg]:h-5 [&_svg]:w-5">ctrlPad</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <NavigationMenuLink className="w-48">
-                <Pencil />
-                <span>Edit Button Layout</span>
-              </NavigationMenuLink>
-              <NavigationMenuLink className="w-48">
-                <Bluetooth />
-                <span>Bluetooth connection</span>
-              </NavigationMenuLink>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenu>
+        <Menu />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
