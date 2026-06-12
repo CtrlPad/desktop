@@ -1,23 +1,23 @@
 import { ButtonElement } from "./ButtonElement"
+import { useSearch } from "@tanstack/react-router"
 
-const buttons = [
-  { id: 0, label: "0" },
-  { id: 1, label: "1" },
-  { id: 2, label: "2" },
-  { id: 3, label: "3" },
-  { id: 4, label: "4" },
-  { id: 5, label: "5" },
-]
+const buttonKeys = ["btn0", "btn1", "btn2", "btn3", "btn4", "btn5"]
 
 export const ButtonGrid = () => {
+  const searchParams = useSearch({ from: '__root__' })
+
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
-      {buttons.map((button) => (
-        <ButtonElement
-          key={button.id}
-          button={button}
-        />
-      ))}
+      {buttonKeys.map((key) => {
+        const sourceId = searchParams[key] || '';
+        return (
+          <ButtonElement
+            key={key}
+            id={key}
+            data={sourceId}
+          />
+        )
+      })}
     </div>
   )
 }

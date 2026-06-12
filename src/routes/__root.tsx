@@ -1,4 +1,4 @@
-import { createRootRouteWithContext, createRouter, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet, useNavigate, useSearch } from '@tanstack/react-router'
 import "../App.css"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -15,21 +15,10 @@ interface Layout {
   btn5: string;
 }
 
-interface RouterContext {
-  layout: Layout
-}
-
-const initialLayout: Layout = {
-  btn0: "",
-  btn1: "",
-  btn2: "",
-  btn3: "",
-  btn4: "",
-  btn5: ""
-};
-
 const RootLayout = () => {
-  const [layout, setLayout] = useState<Layout>(initialLayout);
+  const searchParams = useSearch({ from: '__root__' })
+  const navigate = useNavigate({ from: '__root__' })
+  const [layout, setLayout] = useState<Layout>(searchParams);
 
   useEffect(() => {
     console.log(layout);
@@ -44,11 +33,12 @@ const RootLayout = () => {
           const { target, source } = event.operation;
           console.log(target?.id, source?.id)
 
-          if (target && target.id in layout) {
+          if (target?.id && target.id in layout) {
             setLayout((prev) => ({
               ...prev,
-              [target.id]: source?.id
+              [target.id]: source?.id ?? ''
             }));
+            navigate({ search: (prev) => ({ ...prev, [target.id]: source?.id ?? '' }) })
           }
         }}>
           <TooltipProvider>
@@ -61,4 +51,16 @@ const RootLayout = () => {
   )
 }
 
-export const Route = createRootRouteWithContext<RouterContext>()({ component: RootLayout })
+export const Route = createRootRoute({
+  component: RootLayout,
+  validateSearch: (search: Record<string, unknown>): Layout => {
+    return {
+      btn0: (search.btn0 as string) || '',
+      btn1: (search.btn1 as string) || '',
+      btn2: (search.btn2 as string) || '',
+      btn3: (search.btn3 as string) || '',
+      btn4: (search.btn4 as string) || '',
+      btn5: (search.btn5 as string) || ''
+    }
+  }
+})

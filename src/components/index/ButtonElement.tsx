@@ -1,23 +1,20 @@
 import { useDroppable } from '@dnd-kit/react';
 
 interface Props {
-  button: Button
-  children?: React.ReactNode
+  id: string;
+  data: string;
 }
 
-interface Button {
-  id: number;
-  label: string
-}
-
-const ButtonElement = ({ button, children }: Props) => {
+const ButtonElement = ({ id, data }: Props) => {
   const { ref } = useDroppable({
-    id: "btn" + button.id
+    id: id
   });
 
   return (
-    <div ref={ref} className="flex items-center justify-center border-3 border-primary size-24 rounded-md text-primary">
-      {children || button.id}
+    <div
+      className="flex items-center justify-center border-3 border-primary size-24 rounded-md text-primary"
+      ref={ref}>
+      {data || "Empty"}
     </div>
   )
 }
