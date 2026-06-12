@@ -12,7 +12,7 @@ interface Button {
 
 const ButtonElement = ({ button, children }: Props) => {
   const { ref } = useDroppable({
-    id: "drop-" + button.id
+    id: "btn" + button.id
   });
 
   return (
