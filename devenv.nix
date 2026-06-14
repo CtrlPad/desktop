@@ -18,6 +18,12 @@
     lolcat
   ];
 
+  scripts = {
+    "tauri:dev".exec = "pnpm tauri dev";
+    "tauri:build".exec = "pnpm tauri build";
+    "tauri:info".exec = "pnpm tauri info";
+  };
+
   enterShell = ''
     export XDG_DATA_DIRS="$GSETTINGS_SCHEMAS_PATH" 
     echo
