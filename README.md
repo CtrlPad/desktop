@@ -9,8 +9,6 @@ The desktop application is written in Typescript with [Tauri(https://tauri.app)]
 - [Development Setup](#development-setup)
 - [Contributing](#contributing)
 
-```
-
 ## Development Setup
 
 To contribute to this project, please ensure you have [devenv](https://deven.sh) installed on your system.
