@@ -22,6 +22,14 @@ cd desktop
 devenv shell
 ```
 
+### Available Scripts
+
+| Command | Description |
+| :--- | :--- |
+| `tauri:build` | Compiles the entire application.|
+| `tauri:dev` | Starts the frontend development server with hot reloading |
+| `tauri:info` | Displays system/environment informations |
+
 ## Contributing
 
 1. **Fork** the repository
