@@ -5,8 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { type, arch } from '@tauri-apps/plugin-os';
 
 function Settings() {
+  const OsType = type()
+  const Arch = arch()
+
   return (
     <div className="flex w-full h-screen items-center justify-center">
       <Card className="flex w-4xl">
@@ -19,9 +23,8 @@ function Settings() {
           <p>Maybe Soon</p>
         </CardContent>
         <CardFooter className="flex flex-row space-x-5 justify-center h-5 text-xs">
-          <p>OS: ...</p>
-          <p>Architekture: ...</p>
-          <p>Version: ...</p>
+          <p><span className="font-semibold">OS:</span> {OsType}</p>
+          <p><span className="font-semibold">Arch:</span> {Arch}</p>
         </CardFooter>
       </Card>
     </div>
