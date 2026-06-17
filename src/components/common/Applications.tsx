@@ -40,7 +40,7 @@ function Applications() {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton>
-          Applications
+          Applications ({availableApplications.length})
         </SidebarMenuButton>
         <SidebarMenuAction>
           <AppWindowMac />
