@@ -6,7 +6,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { BluetoothSearching, Pencil } from "lucide-react"
+import { BluetoothSearching, Pencil, SlidersHorizontal } from "lucide-react"
 
 function Menu() {
   return (
@@ -24,6 +24,10 @@ function Menu() {
             <NavigationMenuLink className="w-48" href="/connection">
               <BluetoothSearching />
               <span>Bluetooth Connections</span>
+            </NavigationMenuLink>
+            <NavigationMenuLink className="w-48" href="/settings">
+              <SlidersHorizontal />
+              <span>Settings</span>
             </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
