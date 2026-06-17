@@ -11,14 +11,6 @@ import { AppWindowMac, Disc3, GripVertical } from "lucide-react"
 import { useDraggable } from '@dnd-kit/react';
 import { useInstalledApps } from '@/hooks/use-applications';
 
-const applications = [
-  "Discord",
-  "Spotify",
-  "Bitwarden",
-  "Zen Browser",
-  "Ghostty",
-]
-
 const media = [
   "Volume Up",
   "Volume Down",
