@@ -1,10 +1,10 @@
-import { createRootRoute, Outlet, useNavigate, useSearch } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import "../App.css"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import AppSidebar from '@/components/common/AppSidebar'
 import { DragDropProvider } from '@dnd-kit/react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface Layout {
   btn0: string;
@@ -16,13 +16,9 @@ interface Layout {
 }
 
 const RootLayout = () => {
-  const searchParams = useSearch({ from: '__root__' })
-  const navigate = useNavigate({ from: '__root__' })
+  const searchParams = Route.useSearch()
+  const navigate = Route.useNavigate()
   const [layout, setLayout] = useState<Layout>(searchParams);
-
-  useEffect(() => {
-    console.log(layout);
-  }, [layout]);
 
   return (
     <>

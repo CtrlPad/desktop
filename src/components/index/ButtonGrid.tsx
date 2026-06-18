@@ -1,7 +1,7 @@
 import { ButtonElement } from "./ButtonElement"
 import { useSearch } from "@tanstack/react-router"
 
-const buttonKeys = ["btn0", "btn1", "btn2", "btn3", "btn4", "btn5"]
+const buttonKeys = ["btn0", "btn1", "btn2", "btn3", "btn4", "btn5"] as const
 
 export const ButtonGrid = () => {
   const searchParams = useSearch({ from: '__root__' })
