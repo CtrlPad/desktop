@@ -25,8 +25,10 @@ async function extractDataFromDesktopFile(filePath: string): Promise<string | nu
   if (name && name[1]) {
     return name[1]
   }
+  return null
 }
-async function getDesktopFile(filePath: string): Promise<string[] | null> {
+
+async function getDesktopFile(filePath: string): Promise<string[]> {
   const desktopFiles: string[] = []
   const entries = await readDir(filePath)
   for (const entry of entries) {
@@ -38,7 +40,7 @@ async function getDesktopFile(filePath: string): Promise<string[] | null> {
   return desktopFiles
 }
 
-async function getApplications(): Promise<string[]> {
+async function getApplications(): Promise<string[] | null> {
   const desktopFileData: string[] = []
   const checkedDirs = await checkXdgDataDirs(await getXdgDataDirs())
   for (const dir of checkedDirs) {
@@ -46,7 +48,9 @@ async function getApplications(): Promise<string[]> {
 
     for (const file of desktopFile) {
       const name = await extractDataFromDesktopFile(file)
-      desktopFileData.push(name)
+      if (name !== null) {
+        desktopFileData.push(name)
+      }
     }
   }
   return desktopFileData
