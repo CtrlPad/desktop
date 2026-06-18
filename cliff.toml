@@ -1,0 +1,15 @@
+[git]
+require_conventional = true 
+commit_parsers = [
+    { message = "^feat", group = "✨ Features"},
+    { message = "^fix", group = "🐛 Bug Fixes"},
+    { message = "^doc", group = "📚 Documentation"},
+    { message = "^perf", group = "⚡ Performance"},
+    { message = "^refactor", group = "♻️ Refactoring"},
+    { message = "^test", group = "🧪 Tests"},
+    { message = "ci" group = "🔧 Build & CI"},
+    { group = "📦 Other Changes", default_scope = "other" }
+]
+
+[changelog]
+header = "Changelog"

@@ -51,6 +51,15 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install
 
+      - name: generate changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: --latest --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+
       - name: release application
         uses: tauri-apps/tauri-action@v0
         env:
@@ -58,7 +67,7 @@ jobs:
         with:
           tagName: v__VERSION__ 
           releaseName: 'v__VERSION__'
-          releaseBody: 'See the assets to download this version and install.'
+          releaseBody: ${{ steps.git-cliff.outputs.content }}
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
