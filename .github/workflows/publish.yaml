@@ -57,8 +57,6 @@ jobs:
         with:
           config: cliff.toml
           args: --latest --strip header
-        env:
-          OUTPUT: CHANGELOG.md
 
       - name: release application
         uses: tauri-apps/tauri-action@v0
@@ -67,7 +65,7 @@ jobs:
         with:
           tagName: v__VERSION__ 
           releaseName: 'v__VERSION__'
-          releaseBody: ${{ steps.git-cliff.outputs.content }}
+          releaseBody: ${{ steps.git-cliff.outputs.changelog }}
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
