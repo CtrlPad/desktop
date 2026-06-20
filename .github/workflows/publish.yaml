@@ -6,6 +6,23 @@ on:
   workflow_dispatch:
 
 jobs:
+  changelog:
+    runs-on: ubuntu-22.04
+    outputs:
+      release_body: ${{ steps.git-cliff.outputs.content }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: generate changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: -vv --latest --strip header
+
   publish-tauri:
     permissions:
       contents: write
@@ -65,7 +82,7 @@ jobs:
         with:
           tagName: v__VERSION__ 
           releaseName: 'v__VERSION__'
-          releaseBody: ${{ steps.git-cliff.outputs.changelog }}
+          body: ${{ needs.changelog.outputs.release_body }}
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
