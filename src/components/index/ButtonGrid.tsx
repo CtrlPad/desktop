@@ -1,15 +1,15 @@
 import { ButtonElement } from "./ButtonElement"
-import { useSearch } from "@tanstack/react-router"
+import { useLayoutStore } from "@/routes/__root"
 
 const buttonKeys = ["btn0", "btn1", "btn2", "btn3", "btn4", "btn5"] as const
 
 export const ButtonGrid = () => {
-  const searchParams = useSearch({ from: '__root__' })
+  const layout = useLayoutStore((state) => state.layout)
 
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
       {buttonKeys.map((key) => {
-        const sourceId = searchParams[key];
+        const sourceId = layout[key];
         return (
           <ButtonElement
             key={key}
