@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ButtonElement = ({ id, data }: Props) => {
-  const { ref } = useDroppable({
+  const { isDropTarget, ref } = useDroppable({
     id: id
   });
 
@@ -16,7 +16,8 @@ const ButtonElement = ({ id, data }: Props) => {
 
   return (
     <div
-      className="flex items-center justify-center border-3 border-primary size-24 rounded-md text-primary"
+      className={`flex items-center justify-center border-3 size-24 rounded-md text-primary transition-colors 
+        ${isDropTarget ? 'border-green-500' : 'border-primary'}`}
       ref={ref}>
       {formatData(data) || "Empty"}
     </div>
