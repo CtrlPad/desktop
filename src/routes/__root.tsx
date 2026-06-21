@@ -53,7 +53,7 @@ const RootLayout = () => {
 
           if (target?.id && target.id in layout) {
             const layoutKey = target.id as keyof Layout;
-            const value = source?.id ?? '';
+            const value = source?.id.toString() ?? '';
 
             updateLayoutItem(layoutKey, value);
           }
