@@ -76,7 +76,7 @@ jobs:
         with:
           tagName: v__VERSION__ 
           releaseName: 'v__VERSION__'
-          body: ${{ needs.changelog.outputs.release_body }}
+          releaseBody: ${{ needs.changelog.outputs.release_body }}
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
