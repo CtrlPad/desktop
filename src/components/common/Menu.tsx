@@ -5,8 +5,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { BluetoothSearching, Pencil, SlidersHorizontal } from "lucide-react"
+} from "@/components/ui/navigation-menu";
+import { BluetoothSearching, Pencil, SlidersHorizontal } from "lucide-react";
 
 function Menu() {
   return (
@@ -33,7 +33,7 @@ function Menu() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
 
-export default Menu
+export default Menu;

@@ -6,21 +6,22 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
-} from "@/components/ui/sidebar"
-import { AppWindowMac, Disc3, GripVertical } from "lucide-react"
-import { useDraggable } from '@dnd-kit/react';
-import { useInstalledApps } from '@/hooks/use-applications';
+} from "@/components/ui/sidebar";
+import { AppWindowMac, Disc3, GripVertical } from "lucide-react";
+import { useDraggable } from "@dnd-kit/react";
+import { useInstalledApps } from "@/hooks/use-applications";
 
-const media = [
-  "Volume Up",
-  "Volume Down",
-  "Volume Mute",
-  "Microphone Toggle"
-]
+const media = ["Volume Up", "Volume Down", "Volume Mute", "Microphone Toggle"];
 
-function DraggableSidebarItem({ id, children }: { id: string; children: React.ReactNode }) {
+function DraggableSidebarItem({
+  id,
+  children,
+}: {
+  id: string;
+  children: React.ReactNode;
+}) {
   const { ref } = useDraggable({
-    id: id
+    id: id,
   });
   return (
     <div ref={ref}>
@@ -31,7 +32,7 @@ function DraggableSidebarItem({ id, children }: { id: string; children: React.Re
         </SidebarMenuSubButton>
       </SidebarMenuSubItem>
     </div>
-  )
+  );
 }
 
 function Applications() {
@@ -49,14 +50,14 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {availableApplications.map((item) => (
-            <DraggableSidebarItem id={"app-" + item} key={"app-" + item}>{item}</DraggableSidebarItem>
+            <DraggableSidebarItem id={"app-" + item} key={"app-" + item}>
+              {item}
+            </DraggableSidebarItem>
           ))}
         </SidebarMenuSub>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton>
-          Media
-        </SidebarMenuButton>
+        <SidebarMenuButton>Media</SidebarMenuButton>
         <SidebarMenuAction>
           <Disc3 />
         </SidebarMenuAction>
@@ -64,14 +65,14 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {media.map((item) => (
-            <DraggableSidebarItem id={"media-" + item} key={"media-" + item}>{item}</DraggableSidebarItem>
+            <DraggableSidebarItem id={"media-" + item} key={"media-" + item}>
+              {item}
+            </DraggableSidebarItem>
           ))}
         </SidebarMenuSub>
       </SidebarMenuItem>
-
     </SidebarMenu>
-
-  )
+  );
 }
 
-export default Applications
+export default Applications;

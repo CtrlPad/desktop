@@ -2,7 +2,7 @@
 
 ![GitHub stars](https://img.shields.io/github/stars/ctrlPad/firmware?style=for-the-badge&logo=github) ![GitHub issues](https://img.shields.io/github/issues/ctrlPad/firmware?style=for-the-badge&logo=github) ![Last commit](https://img.shields.io/github/last-commit/ctrlPad/firmware?style=for-the-badge&logo=github)
 
-The desktop application is written in Typescript with [Tauri(https://tauri.app)] 
+The desktop application is written in Typescript with [Tauri(https://tauri.app)]
 
 ## Table of Content
 
@@ -24,11 +24,11 @@ devenv shell
 
 ### Available Scripts
 
-| Command | Description |
-| :--- | :--- |
-| `tauri:build` | Compiles the entire application.|
-| `tauri:dev` | Starts the frontend development server with hot reloading |
-| `tauri:info` | Displays system/environment informations |
+| Command       | Description                                               |
+| :------------ | :-------------------------------------------------------- |
+| `tauri:build` | Compiles the entire application.                          |
+| `tauri:dev`   | Starts the frontend development server with hot reloading |
+| `tauri:info`  | Displays system/environment informations                  |
 
 ## Contributing
 
@@ -40,4 +40,3 @@ devenv shell
 6. **Open** a PR
 
 Please follow the existing code style. Thanks!
-

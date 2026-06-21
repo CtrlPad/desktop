@@ -1,59 +1,61 @@
 import { invoke } from "@tauri-apps/api/core";
 import { join } from "@tauri-apps/api/path";
-import { exists, readTextFile, readDir } from '@tauri-apps/plugin-fs';
+import { exists, readTextFile, readDir } from "@tauri-apps/plugin-fs";
 
 async function getXdgDataDirs(): Promise<string[]> {
-  const dirString: string = await invoke("get_xdg_data_dirs")
+  const dirString: string = await invoke("get_xdg_data_dirs");
   const dirs = dirString.split(":");
-  return dirs
+  return dirs;
 }
 
 async function checkXdgDataDirs(dirs: string[]): Promise<string[]> {
-  const checkedDirs: string[] = []
+  const checkedDirs: string[] = [];
   for (const dir of dirs) {
-    const appDir = await join(dir, "applications")
+    const appDir = await join(dir, "applications");
     if (await exists(appDir)) {
-      checkedDirs.push(appDir)
+      checkedDirs.push(appDir);
     }
   }
-  return checkedDirs
+  return checkedDirs;
 }
 
-async function extractDataFromDesktopFile(filePath: string): Promise<string | null> {
-  const content = await readTextFile(filePath)
+async function extractDataFromDesktopFile(
+  filePath: string,
+): Promise<string | null> {
+  const content = await readTextFile(filePath);
   const name = content.match(/^Name=(.+)$/m);
   if (name && name[1]) {
-    return name[1]
+    return name[1];
   }
-  return null
+  return null;
 }
 
 async function getDesktopFile(filePath: string): Promise<string[]> {
-  const desktopFiles: string[] = []
-  const entries = await readDir(filePath)
+  const desktopFiles: string[] = [];
+  const entries = await readDir(filePath);
   for (const entry of entries) {
     if (entry.name.endsWith(".desktop")) {
-      const fullPath = await join(filePath, entry.name)
-      desktopFiles.push(fullPath)
+      const fullPath = await join(filePath, entry.name);
+      desktopFiles.push(fullPath);
     }
   }
-  return desktopFiles
+  return desktopFiles;
 }
 
 async function getApplications(): Promise<string[] | null> {
-  const desktopFileData: string[] = []
-  const checkedDirs = await checkXdgDataDirs(await getXdgDataDirs())
+  const desktopFileData: string[] = [];
+  const checkedDirs = await checkXdgDataDirs(await getXdgDataDirs());
   for (const dir of checkedDirs) {
-    const desktopFile = await getDesktopFile(dir)
+    const desktopFile = await getDesktopFile(dir);
 
     for (const file of desktopFile) {
-      const name = await extractDataFromDesktopFile(file)
+      const name = await extractDataFromDesktopFile(file);
       if (name !== null) {
-        desktopFileData.push(name)
+        desktopFileData.push(name);
       }
     }
   }
-  return desktopFileData
+  return desktopFileData;
 }
 
-export { getApplications }
+export { getApplications };

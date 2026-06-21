@@ -4,11 +4,11 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-  SidebarGroupLabel
-} from "@/components/ui/sidebar"
-import packageJson from "../../../package.json"
-import Menu from "@/components/common/Menu"
-import Applications from "@/components/common/Applications"
+  SidebarGroupLabel,
+} from "@/components/ui/sidebar";
+import packageJson from "../../../package.json";
+import Menu from "@/components/common/Menu";
+import Applications from "@/components/common/Applications";
 
 function AppSidebar() {
   return (
@@ -26,8 +26,8 @@ function AppSidebar() {
         <p>v{packageJson.version}</p>
         <p>by brainlesslukas</p>
       </SidebarFooter>
-    </Sidebar >
-  )
+    </Sidebar>
+  );
 }
 
-export default AppSidebar
+export default AppSidebar;
