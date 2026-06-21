@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "format": "pnpm prettier --write .",
-    "format:check": "pnpm prettier --check ."
+    "format:check": "pnpm prettier --check .",
+    "lint": "pnpm eslint ."
   },
   "dependencies": {
     "@dnd-kit/react": "^0.5.0",
