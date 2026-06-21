@@ -9,12 +9,13 @@ const useInstalledApps = () => {
   const getInstalledApps = async () => {
     try {
       switch (platform()) {
-        case "linux":
+        case "linux": {
           const applications = await getApplications();
           if (applications !== null) {
             setAvailableApplications(applications);
           }
           break;
+        }
         default:
           console.log("Unsupported OS");
       }
