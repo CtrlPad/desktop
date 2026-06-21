@@ -24,6 +24,7 @@ jobs:
           args: -vv --latest --strip header
 
   publish-tauri:
+    needs: changelog
     permissions:
       contents: write
     strategy:
@@ -67,13 +68,6 @@ jobs:
 
       - name: install frontend dependencies
         run: pnpm install
-
-      - name: generate changelog
-        uses: orhun/git-cliff-action@v4
-        id: git-cliff
-        with:
-          config: cliff.toml
-          args: --latest --strip header
 
       - name: release application
         uses: tauri-apps/tauri-action@v0
