@@ -1,14 +1,18 @@
 [git]
-require_conventional = true 
+conventional_commits = false
+filter_unconventional = false
+
 commit_parsers = [
+    { message = "^Merge pull request", skip = true },
+    { message = "^Merge branch", skip = true },
     { message = "^feat", group = "✨ Features"},
     { message = "^fix", group = "🐛 Bug Fixes"},
-    { message = "^doc", group = "📚 Documentation"},
+    { message = "^docs", group = "📚 Documentation"},
     { message = "^perf", group = "⚡ Performance"},
     { message = "^refactor", group = "♻️ Refactoring"},
     { message = "^test", group = "🧪 Tests"},
-    { message = "ci", group = "🔧 Build & CI"},
-    { group = "📦 Other Changes", default_scope = "other" }
+    { message = "^ci", group = "🔧 Build & CI"},
+    { group = "📦 Other Changes", default_scope = "other" },
 ]
 
 [changelog]
