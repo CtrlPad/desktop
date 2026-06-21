@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "format": "pnpm prettier --write .",
+    "format:check": "pnpm prettier --check ."
   },
   "dependencies": {
     "@dnd-kit/react": "^0.5.0",

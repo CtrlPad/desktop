@@ -29,6 +29,8 @@ devenv shell
 | `tauri:build` | Compiles the entire application.                          |
 | `tauri:dev`   | Starts the frontend development server with hot reloading |
 | `tauri:info`  | Displays system/environment informations                  |
+| `pnpm format` | Format all files with Prettier                              |
+| `pnpm format:check` | Check the formatting of all files with Prettier       |
 
 ## Contributing
 
