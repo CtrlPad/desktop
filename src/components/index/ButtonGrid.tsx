@@ -9,7 +9,7 @@ export const ButtonGrid = () => {
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
       {buttonKeys.map((key) => {
-        const sourceId = layout[key];
+        const sourceId = layout[key].icon;
         return <ButtonElement key={key} id={key} data={sourceId} />;
       })}
     </div>

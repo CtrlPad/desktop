@@ -5,6 +5,7 @@ import {
   startScan,
   type BleDevice,
 } from "@mnlphlp/plugin-blec";
+import { generateButttonLayoutConfig } from "@/utils/generateButtonLayout";
 
 const useScanDevices = () => {
   const [bleDevices, setBleDevices] = useState<BleDevice[]>([]);
@@ -39,10 +40,13 @@ const useConnectDevice = () => {
 };
 
 const useSendLayout = () => {
-  const sendLayout = async (layoutConfig: string) => {
+  const sendLayout = async () => {
     try {
-      console.log("Config:", layoutConfig);
-      await sendString("62148466-62a9-4f65-bc29-2c2e408b8684", layoutConfig);
+      console.log("Config:", generateButttonLayoutConfig());
+      await sendString(
+        "62148466-62a9-4f65-bc29-2c2e408b8684",
+        generateButttonLayoutConfig(),
+      );
     } catch (error) {
       console.log(error);
     }

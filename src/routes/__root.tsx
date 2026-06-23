@@ -6,13 +6,19 @@ import AppSidebar from "@/components/common/AppSidebar";
 import { DragDropProvider } from "@dnd-kit/react";
 import { create } from "zustand";
 
+interface LayoutItem {
+  id: number;
+  name: string;
+  icon: string;
+}
+
 interface Layout {
-  btn0: string;
-  btn1: string;
-  btn2: string;
-  btn3: string;
-  btn4: string;
-  btn5: string;
+  btn0: LayoutItem;
+  btn1: LayoutItem;
+  btn2: LayoutItem;
+  btn3: LayoutItem;
+  btn4: LayoutItem;
+  btn5: LayoutItem;
 }
 
 interface LayoutStore {
@@ -22,18 +28,45 @@ interface LayoutStore {
 
 export const useLayoutStore = create<LayoutStore>((set) => ({
   layout: {
-    btn0: "",
-    btn1: "",
-    btn2: "",
-    btn3: "",
-    btn4: "",
-    btn5: "",
+    btn0: {
+      id: 0,
+      name: "",
+      icon: "",
+    },
+    btn1: {
+      id: 1,
+      name: "",
+      icon: "",
+    },
+    btn2: {
+      id: 2,
+      name: "",
+      icon: "",
+    },
+    btn3: {
+      id: 3,
+      name: "",
+      icon: "",
+    },
+    btn4: {
+      id: 4,
+      name: "",
+      icon: "",
+    },
+    btn5: {
+      id: 5,
+      name: "",
+      icon: "",
+    },
   },
   updateLayoutItem: (key, value) =>
     set((state) => ({
       layout: {
         ...state.layout,
-        [key]: value,
+        [key]: {
+          ...state.layout[key],
+          icon: value,
+        },
       },
     })),
 }));
@@ -51,12 +84,13 @@ const RootLayout = () => {
 
             const { target, source } = event.operation;
             console.log(target?.id, source?.id);
+            if (!target) return;
 
-            if (target?.id && target.id in layout) {
+            if (target.id in layout) {
               const layoutKey = target.id as keyof Layout;
-              const value = source?.id.toString() ?? "";
+              const value = source?.id.toString();
 
-              updateLayoutItem(layoutKey, value);
+              updateLayoutItem(layoutKey, value || "");
             }
           }}
         >
