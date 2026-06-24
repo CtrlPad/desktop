@@ -50,7 +50,7 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {availableApplications.map((item) => (
-            <DraggableSidebarItem id={"app-" + item} key={"app-" + item}>
+            <DraggableSidebarItem id={item} key={item}>
               {item}
             </DraggableSidebarItem>
           ))}
@@ -65,7 +65,7 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {media.map((item) => (
-            <DraggableSidebarItem id={"media-" + item} key={"media-" + item}>
+            <DraggableSidebarItem id={item} key={item}>
               {item}
             </DraggableSidebarItem>
           ))}
