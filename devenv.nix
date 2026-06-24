@@ -24,8 +24,9 @@
     "tauri:info".exec = "pnpm tauri info";
   };
 
+  env.XDG_DATA_DIRS = "/run/current-system/sw/share";
+
   enterShell = ''
-    export XDG_DATA_DIRS="/run/current-system/sw/share:$GSETTINGS_SCHEMAS_PATH" 
     echo
     figlet -f slant "ctrlPad" | lolcat -p 1
     echo
