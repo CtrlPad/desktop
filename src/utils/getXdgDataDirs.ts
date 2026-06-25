@@ -2,6 +2,11 @@ import { invoke } from "@tauri-apps/api/core";
 import { join } from "@tauri-apps/api/path";
 import { exists, readTextFile, readDir } from "@tauri-apps/plugin-fs";
 
+interface Data {
+  name: string;
+  exec: string;
+}
+
 async function getXdgDataDirs(): Promise<string[]> {
   const dirString: string = await invoke("get_xdg_data_dirs");
   const dirs = dirString.split(":");
@@ -21,13 +26,16 @@ async function checkXdgDataDirs(dirs: string[]): Promise<string[]> {
 
 async function extractDataFromDesktopFile(
   filePath: string,
-): Promise<string | null> {
+): Promise<Data | null> {
   const content = await readTextFile(filePath);
-  const name = content.match(/^Name=(.+)$/m);
-  if (name && name[1]) {
-    return name[1];
-  }
-  return null;
+  const nameMatch = content.match(/^Name=(.+)$/m);
+  const execMatch = content.match(/^Exec=(.+)$/m);
+  if (!nameMatch || !execMatch) return null;
+
+  return {
+    name: nameMatch[1],
+    exec: execMatch[1],
+  };
 }
 
 async function getDesktopFile(filePath: string): Promise<string[]> {
@@ -42,16 +50,17 @@ async function getDesktopFile(filePath: string): Promise<string[]> {
   return desktopFiles;
 }
 
-async function getApplications(): Promise<string[] | null> {
-  const desktopFileData: string[] = [];
+async function getApplications(): Promise<Data[]> {
+  const desktopFileData: Data[] = [];
   const checkedDirs = await checkXdgDataDirs(await getXdgDataDirs());
+
   for (const dir of checkedDirs) {
     const desktopFile = await getDesktopFile(dir);
 
     for (const file of desktopFile) {
-      const name = await extractDataFromDesktopFile(file);
-      if (name !== null) {
-        desktopFileData.push(name);
+      const fileData = await extractDataFromDesktopFile(file);
+      if (fileData !== null) {
+        desktopFileData.push(fileData);
       }
     }
   }

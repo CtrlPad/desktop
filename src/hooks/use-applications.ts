@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { platform } from "@tauri-apps/plugin-os";
 import { getApplications } from "@/utils/getXdgDataDirs";
 
+interface Applications {
+  name: string;
+  exec: string;
+}
+
 const useInstalledApps = () => {
-  const [availableApplications, setAvailableApplications] = useState<string[]>(
-    [],
-  );
+  const [availableApplications, setAvailableApplications] = useState<
+    Applications[]
+  >([]);
   const getInstalledApps = async () => {
     try {
       switch (platform()) {

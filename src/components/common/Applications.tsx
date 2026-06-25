@@ -49,9 +49,9 @@ function Applications() {
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuSub>
-          {availableApplications.map((item) => (
-            <DraggableSidebarItem id={item} key={item}>
-              {item}
+          {availableApplications.map((app, index) => (
+            <DraggableSidebarItem id={app.name} key={index}>
+              {app.name}
             </DraggableSidebarItem>
           ))}
         </SidebarMenuSub>
