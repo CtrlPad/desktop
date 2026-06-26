@@ -10,6 +10,7 @@ interface LayoutItem {
   id: number;
   name: string;
   icon: string;
+  exec: string;
 }
 
 interface Layout {
@@ -23,7 +24,7 @@ interface Layout {
 
 interface LayoutStore {
   layout: Layout;
-  updateLayoutItem: (key: keyof Layout, value: string) => void;
+  updateLayoutItem: (key: keyof Layout, value: Partial<LayoutItem>) => void;
 }
 
 export const useLayoutStore = create<LayoutStore>((set) => ({
@@ -32,31 +33,37 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 0,
       name: "",
       icon: "",
+      exec: "",
     },
     btn1: {
       id: 1,
       name: "",
       icon: "",
+      exec: "",
     },
     btn2: {
       id: 2,
       name: "",
       icon: "",
+      exec: "",
     },
     btn3: {
       id: 3,
       name: "",
       icon: "",
+      exec: "",
     },
     btn4: {
       id: 4,
       name: "",
       icon: "",
+      exec: "",
     },
     btn5: {
       id: 5,
       name: "",
       icon: "",
+      exec: "",
     },
   },
   updateLayoutItem: (key, value) =>
@@ -65,7 +72,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
         ...state.layout,
         [key]: {
           ...state.layout[key],
-          icon: value,
+          ...value,
         },
       },
     })),
@@ -88,9 +95,16 @@ const RootLayout = () => {
 
             if (target.id in layout) {
               const layoutKey = target.id as keyof Layout;
-              const value = source?.id.toString();
+              const dragData = source?.data as Partial<LayoutItem> | undefined;
+              console.log(dragData);
 
-              updateLayoutItem(layoutKey, value || "");
+              if (dragData) {
+                updateLayoutItem(layoutKey, {
+                  name: dragData.name || "",
+                  icon: dragData.icon || "",
+                  exec: dragData.exec || "",
+                });
+              }
             }
           }}
         >
