@@ -10,7 +10,7 @@ interface LayoutItem {
   id: number;
   name: string;
   icon: string;
-  exec: string;
+  action: string;
 }
 
 interface Layout {
@@ -33,37 +33,37 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 0,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
     btn1: {
       id: 1,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
     btn2: {
       id: 2,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
     btn3: {
       id: 3,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
     btn4: {
       id: 4,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
     btn5: {
       id: 5,
       name: "",
       icon: "",
-      exec: "",
+      action: "",
     },
   },
   updateLayoutItem: (key, value) =>
@@ -102,7 +102,7 @@ const RootLayout = () => {
                 updateLayoutItem(layoutKey, {
                   name: dragData.name || "",
                   icon: dragData.icon || "",
-                  exec: dragData.exec || "",
+                  exec: dragData.action || "",
                 });
               }
             }
