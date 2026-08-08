@@ -4,7 +4,7 @@ on:
     types: [published]
 
 jobs:
-  changelog:
+  generate-changelog:
     runs-on: ubuntu-22.04
     outputs:
       release_body: ${{ steps.git-cliff.outputs.content }}
@@ -21,8 +21,9 @@ jobs:
           config: cliff.toml
           args: -vv --latest --strip header
 
-  publish-tauri:
-    needs: changelog
+  release-github:
+    name: release to github (${{ matrix.platform }} ${{ matrix.args }})
+    needs: generate-changelog
     permissions:
       contents: write
     strategy:
@@ -67,14 +68,14 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install
 
-      - name: release application
+      - name: build and upload to github release
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: v__VERSION__
           releaseName: "v__VERSION__"
-          releaseBody: ${{ needs.changelog.outputs.release_body }}
+          releaseBody: ${{ needs.generate-changelog.outputs.release_body }}
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
