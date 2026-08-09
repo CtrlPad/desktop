@@ -102,7 +102,7 @@ const RootLayout = () => {
                 updateLayoutItem(layoutKey, {
                   name: dragData.name || "",
                   icon: dragData.icon || "",
-                  exec: dragData.action || "",
+                  action: dragData.action || "",
                 });
               }
             }
