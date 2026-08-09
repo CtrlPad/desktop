@@ -1,0 +1,66 @@
+name: ctrlpad-desktop
+base: core24
+version: "0.0.2"
+summary: Configuration app for the CtrlPad
+description: |
+  The desktop companion application for the CtrlPad. Connect to your device
+  over Bluetooth to arrange the button layout, assign an action to every key
+  and manage the rest of your device settings.
+
+grade: stable
+confinement: strict
+
+platforms:
+  amd64:
+
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/webkit2gtk-4.1:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/webkit2gtk-4.1
+
+apps:
+  ctrlpad-desktop:
+    command: usr/bin/ctrlpad-desktop
+    desktop: usr/share/applications/ctrlpad-desktop.desktop
+    extensions: [gnome]
+    plugs:
+      - bluez
+
+package-repositories:
+  - type: apt
+    components: [main]
+    suites: [noble]
+    key-id: 78E1918602959B9C59103100F1831DDAFC42E99D
+    url: http://ppa.launchpad.net/snappy-dev/snapcraft-daily/ubuntu
+
+parts:
+  build-app:
+    plugin: dump
+    build-snaps:
+      - node/20/stable
+      - rustup/latest/stable
+    build-packages:
+      - libwebkit2gtk-4.1-dev
+      - build-essential
+      - pkg-config
+      - curl
+      - wget
+      - file
+      - libxdo-dev
+      - libssl-dev
+      - libayatana-appindicator3-dev
+      - librsvg2-dev
+      - dpkg
+    stage-packages:
+      - libwebkit2gtk-4.1-0
+      - libayatana-appindicator3-1
+    source: .
+    override-build: |
+      set -eu
+      rustup default stable
+      export npm_config_prefix="$CRAFT_PART_BUILD/node-global"
+      export PATH="$npm_config_prefix/bin:$PATH"
+      npm install -g pnpm@10
+      pnpm install --frozen-lockfile
+      pnpm run tauri build -- --bundles deb
+      dpkg -x src-tauri/target/release/bundle/deb/*.deb "$CRAFT_PART_INSTALL/"
+      sed -i -e "s|Icon=ctrlpad-desktop|Icon=/usr/share/icons/hicolor/32x32/apps/ctrlpad-desktop.png|g" "$CRAFT_PART_INSTALL/usr/share/applications/ctrlpad-desktop.desktop"
