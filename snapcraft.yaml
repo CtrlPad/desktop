@@ -37,7 +37,6 @@ parts:
     plugin: dump
     build-snaps:
       - node/20/stable
-      - rustup/latest/stable
     build-packages:
       - libwebkit2gtk-4.1-dev
       - build-essential
@@ -56,7 +55,9 @@ parts:
     source: .
     override-build: |
       set -eu
-      rustup default stable
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+        | sh -s -- -y --default-toolchain stable --profile minimal --no-modify-path
+      export PATH="$HOME/.cargo/bin:$PATH"
       export npm_config_prefix="$CRAFT_PART_BUILD/node-global"
       export PATH="$npm_config_prefix/bin:$PATH"
       npm install -g pnpm@10
