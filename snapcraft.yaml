@@ -62,6 +62,6 @@ parts:
       export PATH="$npm_config_prefix/bin:$PATH"
       npm install -g pnpm@10
       pnpm install --frozen-lockfile
-      pnpm run tauri build -- --bundles deb
+      pnpm run tauri build --bundles deb
       dpkg -x src-tauri/target/release/bundle/deb/*.deb "$CRAFT_PART_INSTALL/"
       sed -i -e "s|Icon=ctrlpad-desktop|Icon=/usr/share/icons/hicolor/32x32/apps/ctrlpad-desktop.png|g" "$CRAFT_PART_INSTALL/usr/share/applications/ctrlpad-desktop.desktop"
