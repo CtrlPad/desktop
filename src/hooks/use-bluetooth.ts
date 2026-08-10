@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   connect,
+  getConnectionUpdates,
   sendString,
   startScan,
   type BleDevice,
@@ -39,6 +40,14 @@ const useConnectDevice = () => {
   return { connectDevice };
 };
 
+const useIsConnected = () => {
+  const [connected, setConnected] = useState(false);
+  useEffect(() => {
+    getConnectionUpdates(setConnected);
+  }, []);
+  return connected;
+};
+
 const useSendLayout = () => {
   const sendLayout = async () => {
     try {
@@ -54,4 +63,4 @@ const useSendLayout = () => {
   return { sendLayout };
 };
 
-export { useScanDevices, useConnectDevice, useSendLayout };
+export { useScanDevices, useConnectDevice, useSendLayout, useIsConnected };
