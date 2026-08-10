@@ -12,7 +12,7 @@ import Applications from "@/components/common/Applications";
 
 function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="select-none">
       <SidebarHeader>
         <Menu />
       </SidebarHeader>

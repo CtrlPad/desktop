@@ -37,7 +37,7 @@ function DraggableSidebarItem({
   return (
     <div ref={ref}>
       <SidebarMenuSubItem>
-        <SidebarMenuSubButton className="flex justify-between select-none">
+        <SidebarMenuSubButton className="flex justify-between">
           <span className="truncate">{children}</span>
           <GripVertical />
         </SidebarMenuSubButton>
