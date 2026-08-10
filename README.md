@@ -24,15 +24,14 @@ devenv shell
 
 ### Available Scripts
 
-| Command       | Description                                               |
-| :------------ | :-------------------------------------------------------- |
-| `tauri:build` | Compiles the entire application.                          |
-| `tauri:dev`   | Starts the frontend development server with hot reloading |
-| `tauri:info`  | Displays system/environment informations                  |
-| `pnpm format` | Format all files with Prettier                              |
-| `pnpm format:check` | Check the formatting of all files with Prettier       |
-| `pnpm lint` | Lint all files with ESlint |
-
+| Command             | Description                                               |
+| :------------------ | :-------------------------------------------------------- |
+| `tauri:build`       | Compiles the entire application.                          |
+| `tauri:dev`         | Starts the frontend development server with hot reloading |
+| `tauri:info`        | Displays system/environment informations                  |
+| `pnpm format`       | Format all files with Prettier                            |
+| `pnpm format:check` | Check the formatting of all files with Prettier           |
+| `pnpm lint`         | Lint all files with ESlint                                |
 
 ## Contributing
 

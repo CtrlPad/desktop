@@ -3,6 +3,7 @@ import "../App.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AppSidebar from "@/components/common/AppSidebar";
+import Statusbar from "@/components/common/Statusbar";
 import { DragDropProvider } from "@dnd-kit/react";
 import { create } from "zustand";
 
@@ -110,6 +111,7 @@ const RootLayout = () => {
         >
           <TooltipProvider>
             <AppSidebar />
+            <Statusbar />
             <Outlet />
           </TooltipProvider>
         </DragDropProvider>
