@@ -4,7 +4,7 @@ import { exists, readTextFile, readDir } from "@tauri-apps/plugin-fs";
 
 interface Data {
   name: string;
-  exec: string;
+  action: string;
 }
 
 async function getXdgDataDirs(): Promise<string[]> {
@@ -34,7 +34,7 @@ async function extractDataFromDesktopFile(
 
   return {
     name: nameMatch[1],
-    exec: execMatch[1],
+    action: execMatch[1],
   };
 }
 

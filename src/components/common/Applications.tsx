@@ -17,13 +17,13 @@ function DraggableSidebarItem({
   id,
   icon,
   name,
-  exec,
+  action,
   children,
 }: {
   id: string;
   icon?: string;
   name: string;
-  exec: string;
+  action: string;
   children: React.ReactNode;
 }) {
   const { ref } = useDraggable({
@@ -31,7 +31,7 @@ function DraggableSidebarItem({
     data: {
       name,
       icon,
-      exec,
+      action,
     },
   });
   return (
@@ -64,7 +64,7 @@ function Applications() {
             <DraggableSidebarItem
               id={app.name}
               name={app.name}
-              exec={app.exec}
+              action={app.action}
               key={index}
             >
               {app.name}
@@ -81,7 +81,7 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {media.map((item) => (
-            <DraggableSidebarItem id={item} exec="" name="" key={item}>
+            <DraggableSidebarItem id={item} action="" name="" key={item}>
               {item}
             </DraggableSidebarItem>
           ))}

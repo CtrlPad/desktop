@@ -4,7 +4,7 @@ import { getApplications } from "@/utils/getXdgDataDirs";
 
 interface Applications {
   name: string;
-  exec: string;
+  action: string;
 }
 
 const useInstalledApps = () => {
