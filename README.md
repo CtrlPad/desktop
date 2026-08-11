@@ -1,8 +1,8 @@
-# ctrlPad desktop application
+# CtrlPad desktop application
 
 ![GitHub stars](https://img.shields.io/github/stars/ctrlPad/firmware?style=for-the-badge&logo=github) ![GitHub issues](https://img.shields.io/github/issues/ctrlPad/firmware?style=for-the-badge&logo=github) ![Last commit](https://img.shields.io/github/last-commit/ctrlPad/firmware?style=for-the-badge&logo=github)
 
-The desktop application is written in Typescript with [Tauri(https://tauri.app)]
+The desktop application is written in Typescript with [Tauri](https://tauri.app)]
 
 ## Table of Content
 
