@@ -4,7 +4,8 @@ import { exists, readTextFile, readDir } from "@tauri-apps/plugin-fs";
 
 interface Data {
   name: string;
-  action: string;
+  actionType: string;
+  target: string;
 }
 
 async function getXdgDataDirs(): Promise<string[]> {
@@ -24,6 +25,12 @@ async function checkXdgDataDirs(dirs: string[]): Promise<string[]> {
   return checkedDirs;
 }
 
+// "/usr/bin/spotify --uri=%U" -> "spotify"
+function execToTarget(exec: string): string {
+  const binary = exec.trim().split(/\s+/)[0];
+  return binary.split("/").pop() ?? binary;
+}
+
 async function extractDataFromDesktopFile(
   filePath: string,
 ): Promise<Data | null> {
@@ -34,7 +41,8 @@ async function extractDataFromDesktopFile(
 
   return {
     name: nameMatch[1],
-    action: execMatch[1],
+    actionType: "application",
+    target: execToTarget(execMatch[1]),
   };
 }
 

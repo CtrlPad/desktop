@@ -7,21 +7,24 @@ import Statusbar from "@/components/common/Statusbar";
 import { DragDropProvider } from "@dnd-kit/react";
 import { create } from "zustand";
 
-interface LayoutItem {
+export interface LayoutItem {
   id: number;
   name: string;
   icon: string;
-  action: string;
+  actionType: string; // e.g application, volume, ...
+  target: string; // spotify, +10, ...
 }
 
-interface Layout {
-  btn0: LayoutItem;
-  btn1: LayoutItem;
-  btn2: LayoutItem;
-  btn3: LayoutItem;
-  btn4: LayoutItem;
-  btn5: LayoutItem;
-}
+export const buttonKeys = [
+  "btn0",
+  "btn1",
+  "btn2",
+  "btn3",
+  "btn4",
+  "btn5",
+] as const;
+
+type Layout = Record<(typeof buttonKeys)[number], LayoutItem>;
 
 interface LayoutStore {
   layout: Layout;
@@ -34,37 +37,43 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 0,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
     btn1: {
       id: 1,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
     btn2: {
       id: 2,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
     btn3: {
       id: 3,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
     btn4: {
       id: 4,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
     btn5: {
       id: 5,
       name: "",
       icon: "",
-      action: "",
+      actionType: "",
+      target: "",
     },
   },
   updateLayoutItem: (key, value) =>
@@ -103,7 +112,8 @@ const RootLayout = () => {
                 updateLayoutItem(layoutKey, {
                   name: dragData.name || "",
                   icon: dragData.icon || "",
-                  action: dragData.action || "",
+                  actionType: dragData.actionType || "",
+                  target: dragData.target || "",
                 });
               }
             }

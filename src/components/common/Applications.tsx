@@ -11,19 +11,26 @@ import { AppWindowMac, Disc3, GripVertical } from "lucide-react";
 import { useDraggable } from "@dnd-kit/react";
 import { useInstalledApps } from "@/hooks/use-applications";
 
-const media = ["Volume Up", "Volume Down", "Volume Mute", "Microphone Toggle"];
+const media = [
+  { name: "Volume Up", actionType: "volume", target: "up" },
+  { name: "Volume Down", actionType: "volume", target: "down" },
+  { name: "Volume Mute", actionType: "volume", target: "mute" },
+  { name: "Microphone Toggle", actionType: "microphone", target: "toggle" },
+];
 
 function DraggableSidebarItem({
   id,
   icon,
   name,
-  action,
+  actionType,
+  target,
   children,
 }: {
   id: string;
   icon?: string;
   name: string;
-  action: string;
+  actionType: string;
+  target: string;
   children: React.ReactNode;
 }) {
   const { ref } = useDraggable({
@@ -31,7 +38,8 @@ function DraggableSidebarItem({
     data: {
       name,
       icon,
-      action,
+      actionType,
+      target,
     },
   });
   return (
@@ -64,7 +72,8 @@ function Applications() {
             <DraggableSidebarItem
               id={app.name}
               name={app.name}
-              action={app.action}
+              actionType={app.actionType}
+              target={app.target}
               key={index}
             >
               {app.name}
@@ -81,8 +90,14 @@ function Applications() {
       <SidebarMenuItem>
         <SidebarMenuSub>
           {media.map((item) => (
-            <DraggableSidebarItem id={item} action="" name="" key={item}>
-              {item}
+            <DraggableSidebarItem
+              id={item.name}
+              name={item.name}
+              actionType={item.actionType}
+              target={item.target}
+              key={item.name}
+            >
+              {item.name}
             </DraggableSidebarItem>
           ))}
         </SidebarMenuSub>
