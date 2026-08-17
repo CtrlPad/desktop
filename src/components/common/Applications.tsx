@@ -12,8 +12,8 @@ import { useDraggable } from "@dnd-kit/react";
 import { useInstalledApps } from "@/hooks/use-applications";
 
 const media = [
-  { name: "Volume Up", actionType: "volume", target: "up" },
-  { name: "Volume Down", actionType: "volume", target: "down" },
+  { name: "Volume Up", actionType: "volume", target: "+10" },
+  { name: "Volume Down", actionType: "volume", target: "-10" },
   { name: "Volume Mute", actionType: "volume", target: "mute" },
   { name: "Microphone Toggle", actionType: "microphone", target: "toggle" },
 ];
