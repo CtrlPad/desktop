@@ -35,3 +35,5 @@ devenv.local.yaml
 .pre-commit-config.yaml
 
 result
+
+.tanstack
