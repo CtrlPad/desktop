@@ -7,8 +7,15 @@ export const ButtonGrid = () => {
   return (
     <div className="grid grid-cols-3 gap-4 max-w-80">
       {buttonKeys.map((key) => {
-        const applicationName = layout[key].name;
-        return <ButtonElement key={key} id={key} data={applicationName} />;
+        const item = layout[key];
+        return (
+          <ButtonElement
+            key={key}
+            id={key}
+            buttonIndex={item.id}
+            data={item.name}
+          />
+        );
       })}
     </div>
   );
