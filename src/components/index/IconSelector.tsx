@@ -135,7 +135,6 @@ function VirtualizedList({
               value={item}
               aria-setsize={filteredItems.length}
               aria-posinset={virtualItem.index + 1}
-              className="grid"
               style={{
                 position: "absolute",
                 top: 0,
@@ -145,7 +144,7 @@ function VirtualizedList({
                 transform: `translateY(${virtualItem.start}px)`,
               }}
             >
-              <span className="col-start-2">{item.title}</span>
+              <span>{item.title}</span>
             </ComboboxItem>
           );
         })}

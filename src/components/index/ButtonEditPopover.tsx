@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
 import IconSelector from "./IconSelector";
+import ColorSelector from "./ColorSelector";
 
 interface Props {
   buttonId: number;
@@ -26,6 +27,7 @@ const ButtonEditPopover = ({ buttonId }: Props) => {
           <PopoverTitle>Edit Button {buttonId + 1} </PopoverTitle>
         </PopoverHeader>
         <IconSelector />
+        <ColorSelector />
       </PopoverContent>
     </Popover>
   );
