@@ -28,6 +28,7 @@ const ButtonEditPopover = ({ buttonId }: Props) => {
         </PopoverHeader>
         <IconSelector />
         <ColorSelector />
+        <Button>Apply to Button {buttonId + 1}</Button>
       </PopoverContent>
     </Popover>
   );
