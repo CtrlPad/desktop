@@ -135,6 +135,7 @@ function VirtualizedList({
               value={item}
               aria-setsize={filteredItems.length}
               aria-posinset={virtualItem.index + 1}
+              className="flex gap-2"
               style={{
                 position: "absolute",
                 top: 0,
@@ -144,6 +145,14 @@ function VirtualizedList({
                 transform: `translateY(${virtualItem.start}px)`,
               }}
             >
+              <span
+                className="[&>svg]:fill-(--icon-color)"
+                style={
+                  { "--icon-color": `#${item.hex}` } as React.CSSProperties
+                }
+                aria-hidden="true"
+                dangerouslySetInnerHTML={{ __html: item.svg }}
+              />
               <span>{item.title}</span>
             </ComboboxItem>
           );
