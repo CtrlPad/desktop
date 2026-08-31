@@ -48,9 +48,9 @@ export default function IconSelector({ form }: Props) {
             onOpenChange={setOpen}
             itemToStringLabel={getItemLabel}
             value={
-              ALL_ICONS.find((icon) => icon.slug === field.state.value) ?? null
+              ALL_ICONS.find((icon) => icon.svg === field.state.value) ?? null
             }
-            onValueChange={(icon) => field.handleChange(icon?.slug ?? "")}
+            onValueChange={(icon) => field.handleChange(icon?.svg ?? "")}
             onItemHighlighted={(item, { reason, index }) => {
               const virtualizer = virtualizerRef.current;
 
