@@ -11,9 +11,9 @@ export const ButtonGrid = () => {
         return (
           <ButtonElement
             key={key}
-            id={key}
+            buttonId={key}
             buttonIndex={item.id}
-            data={item.name}
+            buttonData={item.name}
           />
         );
       })}

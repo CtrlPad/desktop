@@ -2,14 +2,13 @@ import { useDroppable } from "@dnd-kit/react";
 import ButtonEditPopover from "./ButtonEditPopover";
 
 interface Props {
-  id: string;
-  data: string;
+  buttonId: string;
+  buttonData: string;
   buttonIndex: number;
 }
-// FIXME: const ButtonElement = ({ id, data, buttonIndex }: Props) => { USE DATA PROP
-const ButtonElement = ({ id, buttonIndex }: Props) => {
+const ButtonElement = ({ buttonId, buttonData, buttonIndex }: Props) => {
   const { isDropTarget, ref } = useDroppable({
-    id: id,
+    id: buttonId,
   });
 
   return (
@@ -17,6 +16,7 @@ const ButtonElement = ({ id, buttonIndex }: Props) => {
       className={`relative flex items-center justify-center border-3 size-24 rounded-md text-primary transition-colors ${isDropTarget ? "border-green-500" : "border-primary"}`}
       ref={ref}
     >
+      <span className="text-muted-foreground">{buttonData || ""}</span>
       <div className="absolute bottom-0 right-0">
         <ButtonEditPopover buttonId={buttonIndex} />
       </div>
