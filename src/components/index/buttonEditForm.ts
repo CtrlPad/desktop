@@ -10,18 +10,25 @@ export const buttonEditSchema = z.object({
 export function useButtonEditForm(buttonKey: keyof Layout) {
   const updateLayoutItem = useLayoutStore((state) => state.updateLayoutItem);
   const icon = useLayoutStore((state) => state.layout[buttonKey].icon);
+  const color = useLayoutStore((state) => state.layout[buttonKey].color);
 
   return useForm({
     defaultValues: {
       icon,
-      color: "",
+      color,
     },
     validators: {
       onSubmit: buttonEditSchema,
     },
     onSubmit: async ({ value }) => {
       console.log(value.icon);
-      updateLayoutItem(buttonKey, { icon: value.icon });
+      console.log(value.color);
+      if (value.icon) {
+        updateLayoutItem(buttonKey, { icon: value.icon });
+      }
+      if (value.color) {
+        updateLayoutItem(buttonKey, { color: value.color });
+      }
     },
   });
 }

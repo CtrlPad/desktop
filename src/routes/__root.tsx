@@ -11,6 +11,7 @@ export interface LayoutItem {
   id: number;
   name: string;
   icon: string;
+  color: string;
   actionType: string; // e.g application, volume, ...
   target: string; // spotify, +10, ...
 }
@@ -37,6 +38,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 0,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -44,6 +46,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 1,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -51,6 +54,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 2,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -58,6 +62,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 3,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -65,6 +70,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 4,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -72,6 +78,7 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 5,
       name: "",
       icon: "",
+      color: "",
       actionType: "",
       target: "",
     },
@@ -112,6 +119,7 @@ const RootLayout = () => {
                 updateLayoutItem(layoutKey, {
                   name: dragData.name || "",
                   icon: dragData.icon || "",
+                  color: dragData.color || "",
                   actionType: dragData.actionType || "",
                   target: dragData.target || "",
                 });

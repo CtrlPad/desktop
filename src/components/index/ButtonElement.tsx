@@ -18,11 +18,19 @@ const ButtonElement = ({ buttonKey, buttonData }: Props) => {
       ref={ref}
     >
       <span className="text-muted-foreground">{buttonData.name || ""}</span>
-      <span
-        className="[&>svg]:size-4 [&>svg]:fill-current absolute bottom-0 left-0 p-2"
-        aria-hidden="true"
-        dangerouslySetInnerHTML={{ __html: buttonData.icon }}
-      />
+
+      <div className="absolute bottom-0 left-0 p-2 flex flex-row gap-1 items-center">
+        <span
+          className="[&>svg]:size-4 [&>svg]:fill-current "
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: buttonData.icon }}
+        />
+        <div
+          className="size-4 rounded-xs"
+          style={{ backgroundColor: buttonData.color }}
+        />
+      </div>
+
       <div className="absolute bottom-0 right-0">
         <ButtonEditPopover buttonKey={buttonKey} buttonIndex={buttonData.id} />
       </div>
