@@ -6,6 +6,7 @@ import {
   ComboboxItem,
   ComboboxInput,
 } from "@/components/ui/combobox";
+import type { ButtonEditForm } from "./buttonEditForm";
 
 type Color = {
   label: string;
@@ -19,24 +20,46 @@ const colors: Color[] = [
   { label: "Blue", value: "#155dfc" },
 ];
 
-export default function ColorSelector() {
+interface Props {
+  form: ButtonEditForm;
+}
+
+export default function ColorSelector({ form }: Props) {
   return (
-    <Combobox<Color> items={colors} itemToStringValue={(color) => color.label}>
-      <ComboboxInput placeholder="Select Button Background-Color" />
-      <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
-        <ComboboxEmpty>No colors found :(</ComboboxEmpty>
-        <ComboboxList className="p-0">
-          {(item) => (
-            <ComboboxItem key={item.label} value={item} className="flex gap-2">
-              <div
-                className="size-4 rounded-sm"
-                style={{ backgroundColor: item.value }}
-              />
-              <span>{item.label}</span>
-            </ComboboxItem>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <form.Field
+      name="color"
+      children={(field) => {
+        return (
+          <Combobox<Color>
+            items={colors}
+            itemToStringValue={(color) => color.label}
+            value={
+              colors.find((color) => color.value === field.state.value) ?? null
+            }
+            onValueChange={(color) => field.handleChange(color?.value ?? "")}
+          >
+            <ComboboxInput placeholder="Search background colors…" />
+            <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
+              <ComboboxEmpty>No colors found :(</ComboboxEmpty>
+              <ComboboxList className="p-0">
+                {(item) => (
+                  <ComboboxItem
+                    key={item.label}
+                    value={item}
+                    className="flex gap-2"
+                  >
+                    <div
+                      className="size-4 rounded-sm"
+                      style={{ backgroundColor: item.value }}
+                    />
+                    <span>{item.label}</span>
+                  </ComboboxItem>
+                )}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+        );
+      }}
+    />
   );
 }

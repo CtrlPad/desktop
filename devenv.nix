@@ -20,7 +20,7 @@
 
   scripts = {
     "tauri:dev".exec = "pnpm tauri dev";
-    "tauri:build".exec = "pnpm tauri build";
+    "tauri:build".exec = "pnpm tauri build --bundles deb,rpm";
     "tauri:info".exec = "pnpm tauri info";
   };
 

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/combobox";
 import * as icons from "simple-icons";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import type { ButtonEditForm } from "./buttonEditForm";
 
 type Virtualizer = ReturnType<typeof useVirtualizer<HTMLDivElement, Element>>;
 
@@ -27,46 +28,62 @@ const ALL_ICONS = Object.values(icons).map((icon) => ({
   svg: icon.svg,
 }));
 
-export default function IconSelector() {
+interface Props {
+  form: ButtonEditForm;
+}
+
+export default function IconSelector({ form }: Props) {
   const [open, setOpen] = React.useState(false);
   const virtualizerRef = React.useRef<Virtualizer | null>(null);
 
   return (
-    <Combobox
-      items={ALL_ICONS}
-      virtualized
-      open={open}
-      onOpenChange={setOpen}
-      itemToStringLabel={getItemLabel}
-      onItemHighlighted={(item, { reason, index }) => {
-        const virtualizer = virtualizerRef.current;
+    <form.Field
+      name="icon"
+      children={(field) => {
+        return (
+          <Combobox<VirtualizedItem>
+            items={ALL_ICONS}
+            virtualized
+            open={open}
+            onOpenChange={setOpen}
+            itemToStringLabel={getItemLabel}
+            value={
+              ALL_ICONS.find((icon) => icon.slug === field.state.value) ?? null
+            }
+            onValueChange={(icon) => field.handleChange(icon?.slug ?? "")}
+            onItemHighlighted={(item, { reason, index }) => {
+              const virtualizer = virtualizerRef.current;
 
-        if (!item || !virtualizer) {
-          return;
-        }
+              if (!item || !virtualizer) {
+                return;
+              }
 
-        const isStart = index === 0;
-        const isEnd = index === virtualizer.options.count - 1;
-        const shouldScroll =
-          reason === "none" || (reason === "keyboard" && (isStart || isEnd));
+              const isStart = index === 0;
+              const isEnd = index === virtualizer.options.count - 1;
+              const shouldScroll =
+                reason === "none" ||
+                (reason === "keyboard" && (isStart || isEnd));
 
-        if (shouldScroll) {
-          queueMicrotask(() => {
-            virtualizer.scrollToIndex(index, {
-              align: isEnd ? "start" : "end",
-            });
-          });
-        }
+              if (shouldScroll) {
+                queueMicrotask(() => {
+                  virtualizer.scrollToIndex(index, {
+                    align: isEnd ? "start" : "end",
+                  });
+                });
+              }
+            }}
+          >
+            <ComboboxInput placeholder="Search icons…" />
+            <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
+              <ComboboxEmpty>No icons found :(</ComboboxEmpty>
+              <ComboboxList className="p-0">
+                <VirtualizedList virtualizerRef={virtualizerRef} open={open} />
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+        );
       }}
-    >
-      <ComboboxInput placeholder="Select a Icon" />
-      <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
-        <ComboboxEmpty>No icons found :(</ComboboxEmpty>
-        <ComboboxList className="p-0">
-          <VirtualizedList virtualizerRef={virtualizerRef} open={open} />
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    />
   );
 }
 
