@@ -10,13 +10,15 @@ import { Pen, Undo2 } from "lucide-react";
 import IconSelector from "./IconSelector";
 import ColorSelector from "./ColorSelector";
 import { useButtonEditForm } from "./buttonEditForm";
+import type { Layout } from "@/routes/__root";
 
 interface Props {
-  buttonId: number;
+  buttonKey: keyof Layout;
+  buttonIndex: number;
 }
 
-const ButtonEditPopover = ({ buttonId }: Props) => {
-  const form = useButtonEditForm();
+const ButtonEditPopover = ({ buttonKey, buttonIndex }: Props) => {
+  const form = useButtonEditForm(buttonKey);
 
   return (
     <Popover>
@@ -27,7 +29,7 @@ const ButtonEditPopover = ({ buttonId }: Props) => {
       </PopoverTrigger>
       <PopoverContent align="center">
         <PopoverHeader>
-          <PopoverTitle>Edit Button {buttonId + 1} </PopoverTitle>
+          <PopoverTitle>Edit Button {buttonIndex + 1} </PopoverTitle>
         </PopoverHeader>
         <form
           id="button-edit"

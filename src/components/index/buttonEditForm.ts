@@ -1,22 +1,27 @@
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
+import { useLayoutStore, type Layout } from "@/routes/__root";
 
 export const buttonEditSchema = z.object({
-  icon: z.string().min(1, "Please select an icon."),
-  color: z.string().min(1, "Please select a color."),
+  icon: z.string().optional(),
+  color: z.string().optional(),
 });
 
-export function useButtonEditForm() {
+export function useButtonEditForm(buttonKey: keyof Layout) {
+  const updateLayoutItem = useLayoutStore((state) => state.updateLayoutItem);
+  const icon = useLayoutStore((state) => state.layout[buttonKey].icon);
+
   return useForm({
     defaultValues: {
-      icon: "",
+      icon,
       color: "",
     },
     validators: {
       onSubmit: buttonEditSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("Submit: ", value);
+      console.log(value.icon);
+      updateLayoutItem(buttonKey, { icon: value.icon });
     },
   });
 }

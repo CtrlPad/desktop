@@ -14,6 +14,7 @@ export const ButtonGrid = () => {
             buttonId={key}
             buttonIndex={item.id}
             buttonData={item.name}
+            buttonIcon={item.icon}
           />
         );
       })}

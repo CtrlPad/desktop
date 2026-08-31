@@ -24,7 +24,7 @@ export const buttonKeys = [
   "btn5",
 ] as const;
 
-type Layout = Record<(typeof buttonKeys)[number], LayoutItem>;
+export type Layout = Record<(typeof buttonKeys)[number], LayoutItem>;
 
 interface LayoutStore {
   layout: Layout;
