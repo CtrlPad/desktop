@@ -1,21 +1,15 @@
 import { useDroppable } from "@dnd-kit/react";
 import ButtonEditPopover from "./ButtonEditPopover";
-import type { Layout } from "@/routes/__root";
+import type { Layout, LayoutItem } from "@/routes/__root";
 
 interface Props {
-  buttonId: keyof Layout;
-  buttonData: string;
-  buttonIndex: number;
-  buttonIcon: string;
+  buttonKey: keyof Layout;
+  buttonData: LayoutItem;
 }
-const ButtonElement = ({
-  buttonId,
-  buttonData,
-  buttonIndex,
-  buttonIcon,
-}: Props) => {
+
+const ButtonElement = ({ buttonKey, buttonData }: Props) => {
   const { isDropTarget, ref } = useDroppable({
-    id: buttonId,
+    id: buttonKey,
   });
 
   return (
@@ -23,14 +17,14 @@ const ButtonElement = ({
       className={`relative flex items-center justify-center border-3 size-24 rounded-md text-primary transition-colors ${isDropTarget ? "border-green-500" : "border-primary"}`}
       ref={ref}
     >
-      <span className="text-muted-foreground">{buttonData || ""}</span>
+      <span className="text-muted-foreground">{buttonData.name || ""}</span>
       <span
         className="[&>svg]:size-4 [&>svg]:fill-current absolute bottom-0 left-0 p-2"
         aria-hidden="true"
-        dangerouslySetInnerHTML={{ __html: buttonIcon }}
+        dangerouslySetInnerHTML={{ __html: buttonData.icon }}
       />
       <div className="absolute bottom-0 right-0">
-        <ButtonEditPopover buttonKey={buttonId} buttonIndex={buttonIndex} />
+        <ButtonEditPopover buttonKey={buttonKey} buttonIndex={buttonData.id} />
       </div>
     </div>
   );
