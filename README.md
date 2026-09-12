@@ -4,6 +4,8 @@
 
 The desktop application is written in Typescript with [Tauri](https://tauri.app)]
 
+A couple of demo videos showing the app/project in action can be found in the [`demo`](./demo) folder.
+
 ## Table of Content
 
 - [Development Setup](#development-setup)
