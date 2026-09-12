@@ -11,6 +11,7 @@ import {
 import * as icons from "simple-icons";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { ButtonEditForm } from "./buttonEditForm";
+import { Label } from "@/components/ui/label";
 
 type Virtualizer = ReturnType<typeof useVirtualizer<HTMLDivElement, Element>>;
 
@@ -37,53 +38,59 @@ export default function IconSelector({ form }: Props) {
   const virtualizerRef = React.useRef<Virtualizer | null>(null);
 
   return (
-    <form.Field
-      name="icon"
-      children={(field) => {
-        return (
-          <Combobox<VirtualizedItem>
-            items={ALL_ICONS}
-            virtualized
-            open={open}
-            onOpenChange={setOpen}
-            itemToStringLabel={getItemLabel}
-            value={
-              ALL_ICONS.find((icon) => icon.svg === field.state.value) ?? null
-            }
-            onValueChange={(icon) => field.handleChange(icon?.svg ?? "")}
-            onItemHighlighted={(item, { reason, index }) => {
-              const virtualizer = virtualizerRef.current;
-
-              if (!item || !virtualizer) {
-                return;
+    <>
+      <Label htmlFor="icon">Select Button Icon</Label>
+      <form.Field
+        name="icon"
+        children={(field) => {
+          return (
+            <Combobox<VirtualizedItem>
+              items={ALL_ICONS}
+              virtualized
+              open={open}
+              onOpenChange={setOpen}
+              itemToStringLabel={getItemLabel}
+              value={
+                ALL_ICONS.find((icon) => icon.svg === field.state.value) ?? null
               }
+              onValueChange={(icon) => field.handleChange(icon?.svg ?? "")}
+              onItemHighlighted={(item, { reason, index }) => {
+                const virtualizer = virtualizerRef.current;
 
-              const isStart = index === 0;
-              const isEnd = index === virtualizer.options.count - 1;
-              const shouldScroll =
-                reason === "none" ||
-                (reason === "keyboard" && (isStart || isEnd));
+                if (!item || !virtualizer) {
+                  return;
+                }
 
-              if (shouldScroll) {
-                queueMicrotask(() => {
-                  virtualizer.scrollToIndex(index, {
-                    align: isEnd ? "start" : "end",
+                const isStart = index === 0;
+                const isEnd = index === virtualizer.options.count - 1;
+                const shouldScroll =
+                  reason === "none" ||
+                  (reason === "keyboard" && (isStart || isEnd));
+
+                if (shouldScroll) {
+                  queueMicrotask(() => {
+                    virtualizer.scrollToIndex(index, {
+                      align: isEnd ? "start" : "end",
+                    });
                   });
-                });
-              }
-            }}
-          >
-            <ComboboxInput placeholder="Search icons…" />
-            <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
-              <ComboboxEmpty>No icons found :(</ComboboxEmpty>
-              <ComboboxList className="p-0">
-                <VirtualizedList virtualizerRef={virtualizerRef} open={open} />
-              </ComboboxList>
-            </ComboboxContent>
-          </Combobox>
-        );
-      }}
-    />
+                }
+              }}
+            >
+              <ComboboxInput placeholder="Search icons…" />
+              <ComboboxContent className="w-[var(--anchor-width)] max-w-[var(--available-width)]">
+                <ComboboxEmpty>No icons found :(</ComboboxEmpty>
+                <ComboboxList className="p-0">
+                  <VirtualizedList
+                    virtualizerRef={virtualizerRef}
+                    open={open}
+                  />
+                </ComboboxList>
+              </ComboboxContent>
+            </Combobox>
+          );
+        }}
+      />
+    </>
   );
 }
 

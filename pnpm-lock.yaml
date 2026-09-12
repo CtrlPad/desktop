@@ -55,6 +55,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cn:
+        specifier: ^0.2.6
+        version: 0.2.6
       lucide-react:
         specifier: ^1.37.0
         version: 1.37.0(react@19.2.8)
@@ -64,6 +67,9 @@ importers:
       react:
         specifier: ^19.2.8
         version: 19.2.8
+      react-colorful:
+        specifier: ^5.8.1
+        version: 5.8.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
@@ -2917,6 +2923,14 @@ packages:
       }
     engines: { node: ">=6" }
 
+  cn@0.2.6:
+    resolution:
+      {
+        integrity: sha512-+i4L0zUGgRcEnhsxueVrP7iBGxBx5iD0WOTYg1MwFEu2ZyCmH5Ov2V1cul2Ht5UchRQQgftCf4be/RxspuW6QQ==,
+      }
+    engines: { node: ">=20" }
+    hasBin: true
+
   code-block-writer@13.0.3:
     resolution:
       {
@@ -5594,6 +5608,15 @@ packages:
         integrity: sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==,
       }
     engines: { node: ">= 0.10" }
+
+  react-colorful@5.8.1:
+    resolution:
+      {
+        integrity: sha512-oz68bhsnFWnpDf1ZR8daiQbYpXUnM2h2J6hl9Zg2rTpM/DU6vCqe1E+CpqmqLnJucMZetHZeifSAfJ+geN9lcA==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
+      react-dom: ">=16.8.0"
 
   react-dom@19.2.8:
     resolution:
@@ -8670,6 +8693,8 @@ snapshots:
 
   clsx@2.1.1: {}
 
+  cn@0.2.6: {}
+
   code-block-writer@13.0.3: {}
 
   commander@11.1.0: {}
@@ -10448,6 +10473,11 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.3
       unpipe: 1.0.0
+
+  react-colorful@5.8.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
 
   react-dom@19.2.8(react@19.2.8):
     dependencies:

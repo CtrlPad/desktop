@@ -29,7 +29,9 @@ const ButtonEditPopover = ({ buttonKey, buttonIndex }: Props) => {
       </PopoverTrigger>
       <PopoverContent align="center">
         <PopoverHeader>
-          <PopoverTitle>Edit Button {buttonIndex + 1} </PopoverTitle>
+          <PopoverTitle className="text-base">
+            Edit Button {buttonIndex + 1}{" "}
+          </PopoverTitle>
         </PopoverHeader>
         <form
           id="button-edit"
