@@ -51,11 +51,9 @@ const useIsConnected = () => {
 const useSendLayout = () => {
   const sendLayout = async () => {
     try {
-      console.log("Config:", generateButttonLayoutConfig());
-      await sendString(
-        "62148466-62a9-4f65-bc29-2c2e408b8684",
-        generateButttonLayoutConfig(),
-      );
+      const config = await generateButttonLayoutConfig();
+      console.log("Config:", config);
+      await sendString("62148466-62a9-4f65-bc29-2c2e408b8684", config);
     } catch (error) {
       console.log(error);
     }

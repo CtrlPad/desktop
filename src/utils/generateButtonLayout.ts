@@ -1,18 +1,27 @@
 import { buttonKeys, useLayoutStore } from "@/routes/__root";
+import {
+  rasterizeSvgToImageData,
+  packAlphaTo1Bit,
+  bytesToBase64,
+} from "./rasterizeIcon";
 
-function generateButttonLayoutConfig(): string {
+async function generateButttonLayoutConfig(): Promise<string> {
   const layout = useLayoutStore.getState().layout;
 
-  const config = buttonKeys.map((key) => {
-    const { id, name, icon, color, actionType, target } = layout[key];
-    return {
-      id,
-      name,
-      icon,
-      color,
-      action: `${actionType}:${target}`,
-    };
-  });
+  const config = await Promise.all(
+    buttonKeys.map(async (key) => {
+      const { id, name, icon, color, actionType, target } = layout[key];
+      const rasterizedIcon = await rasterizeSvgToImageData(icon, 32);
+      const packedIcon = packAlphaTo1Bit(rasterizedIcon);
+      return {
+        id,
+        name,
+        icon: bytesToBase64(packedIcon),
+        color,
+        action: `${actionType}:${target}`,
+      };
+    }),
+  );
 
   return JSON.stringify(config);
 }
