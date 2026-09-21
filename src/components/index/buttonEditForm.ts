@@ -21,14 +21,10 @@ export function useButtonEditForm(buttonKey: keyof Layout) {
       onSubmit: buttonEditSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value.icon);
-      console.log(value.color);
-      if (value.icon) {
-        updateLayoutItem(buttonKey, { icon: value.icon });
-      }
-      if (value.color) {
-        updateLayoutItem(buttonKey, { color: value.color });
-      }
+      updateLayoutItem(buttonKey, {
+        icon: value.icon ?? "",
+        color: value.color ?? "",
+      });
     },
   });
 }
