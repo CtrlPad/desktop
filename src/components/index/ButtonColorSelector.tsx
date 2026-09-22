@@ -6,12 +6,12 @@ interface Props {
   form: ButtonEditForm;
 }
 
-export default function ColorSelector({ form }: Props) {
+export default function ButtonColorSelector({ form }: Props) {
   return (
     <>
-      <Label htmlFor="color">Select Button backgrund Color</Label>
+      <Label htmlFor="buttonColor">Select Button backgrund Color</Label>
       <form.Field
-        name="color"
+        name="buttonColor"
         children={(field) => {
           return (
             <>

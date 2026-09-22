@@ -11,7 +11,8 @@ export interface LayoutItem {
   id: number;
   name: string;
   icon: string;
-  color: string;
+  iconColor: string;
+  buttonColor: string;
   actionType: string; // e.g application, volume, ...
   target: string; // spotify, +10, ...
 }
@@ -38,7 +39,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 0,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -46,7 +48,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 1,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -54,7 +57,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 2,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -62,7 +66,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 3,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -70,7 +75,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 4,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -78,7 +84,8 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       id: 5,
       name: "",
       icon: "",
-      color: "",
+      iconColor: "",
+      buttonColor: "",
       actionType: "",
       target: "",
     },
@@ -119,7 +126,8 @@ const RootLayout = () => {
                 updateLayoutItem(layoutKey, {
                   name: dragData.name || "",
                   icon: dragData.icon || "",
-                  color: dragData.color || "",
+                  iconColor: dragData.iconColor || "",
+                  buttonColor: dragData.buttonColor || "",
                   actionType: dragData.actionType || "",
                   target: dragData.target || "",
                 });

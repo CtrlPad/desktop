@@ -27,7 +27,7 @@ const ButtonElement = ({ buttonKey, buttonData }: Props) => {
         />
         <div
           className="size-4 rounded-xs"
-          style={{ backgroundColor: buttonData.color }}
+          style={{ backgroundColor: buttonData.buttonColor }}
         />
       </div>
 

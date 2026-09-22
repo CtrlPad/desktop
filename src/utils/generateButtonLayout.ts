@@ -10,7 +10,8 @@ async function generateButttonLayoutConfig(): Promise<string> {
 
   const config = await Promise.all(
     buttonKeys.map(async (key) => {
-      const { id, name, icon, color, actionType, target } = layout[key];
+      const { id, name, icon, iconColor, buttonColor, actionType, target } =
+        layout[key];
       const encodedIcon = icon
         ? bytesToBase64(
             packAlphaTo1Bit(await rasterizeSvgToImageData(icon, 32)),
@@ -20,7 +21,8 @@ async function generateButttonLayoutConfig(): Promise<string> {
         id,
         name,
         icon: encodedIcon,
-        color,
+        iconColor,
+        buttonColor,
         action: `${actionType}:${target}`,
       };
     }),

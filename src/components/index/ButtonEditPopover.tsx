@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pen, Undo2 } from "lucide-react";
 import IconSelector from "./IconSelector";
-import ColorSelector from "./ColorSelector";
+import ButtonColorSelector from "./ButtonColorSelector";
 import { useButtonEditForm } from "./buttonEditForm";
 import type { Layout } from "@/routes/__root";
 
@@ -42,7 +42,7 @@ const ButtonEditPopover = ({ buttonKey, buttonIndex }: Props) => {
           }}
         >
           <IconSelector form={form} />
-          <ColorSelector form={form} />
+          <ButtonColorSelector form={form} />
         </form>
         <div className="flex flex-row gap-1">
           <Button

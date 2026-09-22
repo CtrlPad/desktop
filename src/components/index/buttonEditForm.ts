@@ -4,18 +4,20 @@ import { useLayoutStore, type Layout } from "@/routes/__root";
 
 export const buttonEditSchema = z.object({
   icon: z.string().optional(),
-  color: z.string().optional(),
+  buttonColor: z.string().optional(),
 });
 
 export function useButtonEditForm(buttonKey: keyof Layout) {
   const updateLayoutItem = useLayoutStore((state) => state.updateLayoutItem);
   const icon = useLayoutStore((state) => state.layout[buttonKey].icon);
-  const color = useLayoutStore((state) => state.layout[buttonKey].color);
+  const buttonColor = useLayoutStore(
+    (state) => state.layout[buttonKey].buttonColor,
+  );
 
   return useForm({
     defaultValues: {
       icon,
-      color,
+      buttonColor,
     },
     validators: {
       onSubmit: buttonEditSchema,
@@ -23,7 +25,7 @@ export function useButtonEditForm(buttonKey: keyof Layout) {
     onSubmit: async ({ value }) => {
       updateLayoutItem(buttonKey, {
         icon: value.icon ?? "",
-        color: value.color ?? "",
+        buttonColor: value.buttonColor ?? "",
       });
     },
   });
