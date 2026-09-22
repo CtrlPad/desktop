@@ -28,7 +28,6 @@ export function useButtonEditForm(buttonKey: keyof Layout) {
       onSubmit: buttonEditSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value.iconColor);
       updateLayoutItem(buttonKey, {
         icon: value.icon ?? "",
         buttonColor: value.buttonColor ?? "",
