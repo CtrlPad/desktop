@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Pen, Undo2 } from "lucide-react";
 import IconSelector from "./IconSelector";
 import ButtonColorSelector from "./ButtonColorSelector";
+import IconColorSelector from "./IconColorSelector";
 import { useButtonEditForm } from "./buttonEditForm";
 import type { Layout } from "@/routes/__root";
 
@@ -27,7 +28,7 @@ const ButtonEditPopover = ({ buttonKey, buttonIndex }: Props) => {
           <Pen size="16" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="center">
+      <PopoverContent align="center" className="w-96">
         <PopoverHeader>
           <PopoverTitle className="text-base">
             Edit Button {buttonIndex + 1}{" "}
@@ -42,7 +43,10 @@ const ButtonEditPopover = ({ buttonKey, buttonIndex }: Props) => {
           }}
         >
           <IconSelector form={form} />
-          <ButtonColorSelector form={form} />
+          <div className="w-full flex flex-row flex-1 gap-3">
+            <ButtonColorSelector form={form} />
+            <IconColorSelector form={form} />
+          </div>
         </form>
         <div className="flex flex-row gap-1">
           <Button
