@@ -15,6 +15,7 @@ const ButtonElement = ({ buttonKey, buttonData }: Props) => {
   return (
     <div
       className={`relative flex items-center justify-center border-3 size-24 rounded-md text-primary transition-colors ${isDropTarget ? "border-green-500" : "border-primary"}`}
+      style={{ backgroundColor: buttonData.buttonColor }}
       ref={ref}
     >
       <span className="text-muted-foreground">{buttonData.name || ""}</span>
@@ -24,10 +25,6 @@ const ButtonElement = ({ buttonKey, buttonData }: Props) => {
           className="[&>svg]:size-4 [&>svg]:fill-current "
           aria-hidden="true"
           dangerouslySetInnerHTML={{ __html: buttonData.icon }}
-        />
-        <div
-          className="size-4 rounded-xs"
-          style={{ backgroundColor: buttonData.buttonColor }}
         />
       </div>
 
