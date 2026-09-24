@@ -22,7 +22,7 @@ function Index() {
           size="lg"
           onClick={() => sendLayout()}
         >
-          <span>Upload to ctrlPad</span>
+          <span>Upload to Ctrlpad</span>
           <ArrowUpIcon />
         </Button>
       </div>
