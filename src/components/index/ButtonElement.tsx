@@ -21,8 +21,13 @@ const ButtonElement = ({ buttonKey, buttonData }: Props) => {
       {buttonData.icon && (
         <div className="flex flex-row gap-1 items-center">
           <span
-            className="[&>svg]:size-10 [&>svg]:fill-current "
+            className="[&>svg]:size-10 [&>svg]:fill-(--icon-color)"
             aria-hidden="true"
+            style={
+              {
+                "--icon-color": `${buttonData.iconColor}`,
+              } as React.CSSProperties
+            }
             dangerouslySetInnerHTML={{ __html: buttonData.icon }}
           />
         </div>
