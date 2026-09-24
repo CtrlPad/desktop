@@ -53,7 +53,10 @@ export default function IconSelector({ form }: Props) {
               value={
                 ALL_ICONS.find((icon) => icon.svg === field.state.value) ?? null
               }
-              onValueChange={(icon) => field.handleChange(icon?.svg ?? "")}
+              onValueChange={(icon) => {
+                field.handleChange(icon?.svg ?? "");
+                form.setFieldValue("iconColor", `#${icon?.hex}`);
+              }}
               onItemHighlighted={(item, { reason, index }) => {
                 const virtualizer = virtualizerRef.current;
 
