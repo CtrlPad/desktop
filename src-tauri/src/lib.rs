@@ -7,6 +7,7 @@ fn get_xdg_data_dirs() -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_store::Builder::new().build())
         .invoke_handler(tauri::generate_handler![get_xdg_data_dirs])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_blec::init())

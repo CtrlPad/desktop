@@ -6,6 +6,8 @@ import AppSidebar from "@/components/common/AppSidebar";
 import Statusbar from "@/components/common/Statusbar";
 import { DragDropProvider } from "@dnd-kit/react";
 import { create } from "zustand";
+import { saveSettings, useLoadSettings } from "@/hooks/use-settings";
+import { useEffect } from "react";
 
 export interface LayoutItem {
   id: number;
@@ -31,9 +33,10 @@ export type Layout = Record<(typeof buttonKeys)[number], LayoutItem>;
 interface LayoutStore {
   layout: Layout;
   updateLayoutItem: (key: keyof Layout, value: Partial<LayoutItem>) => void;
+  setLayout: (layout: Layout) => void;
 }
 
-export const useLayoutStore = create<LayoutStore>((set) => ({
+export const useLayoutStore = create<LayoutStore>((set, get) => ({
   layout: {
     btn0: {
       id: 0,
@@ -90,21 +93,29 @@ export const useLayoutStore = create<LayoutStore>((set) => ({
       target: "",
     },
   },
-  updateLayoutItem: (key, value) =>
-    set((state) => ({
-      layout: {
-        ...state.layout,
-        [key]: {
-          ...state.layout[key],
-          ...value,
-        },
+  updateLayoutItem: (key, value) => {
+    const newLayout = {
+      ...get().layout,
+      [key]: {
+        ...get().layout[key],
+        ...value,
       },
-    })),
+    };
+    set({ layout: newLayout });
+    saveSettings(newLayout);
+  },
+  setLayout: (layout) => set({ layout }),
 }));
 
 const RootLayout = () => {
   const layout = useLayoutStore((state) => state.layout);
   const updateLayoutItem = useLayoutStore((state) => state.updateLayoutItem);
+  const setLayout = useLayoutStore((state) => state.setLayout);
+  const savedLayout = useLoadSettings();
+
+  useEffect(() => {
+    if (savedLayout) setLayout(savedLayout);
+  }, [savedLayout, setLayout]);
 
   return (
     <>
